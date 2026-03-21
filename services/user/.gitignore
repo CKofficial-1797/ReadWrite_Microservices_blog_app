@@ -1,0 +1,42 @@
+# Dependency directories
+node_modules/
+
+# Build output
+.next/
+out/
+dist/
+
+# Environment files
+.env*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS system files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# Testing
+coverage/
+*.lcov
+
+# Misc
+.cache/
+*.local
+*.swp
+
+# Optional: Ignore lock files if working across package managers
+# Uncomment only if you want to avoid tracking them
+# yarn.lock
+# package-lock.json
+# pnpm-lock.yaml
