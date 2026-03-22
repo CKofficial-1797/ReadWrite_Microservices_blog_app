@@ -49,26 +49,29 @@ export const startCacheConsumer = async () => {
                 await redisClient.del(keys);
 
                 console.log(
-                  `🗑️ Blog service invalidated ${keys.length} cache keys matching: ${pattern}`
+                  ` Blog service invalidated ${keys.length} cache keys matching: ${pattern}`
                 );
 
-                const category = "";
+                for (const key of keys) {
+                      const parts = key.split(":");
 
-                const searchQuery = "";
+                      const searchQuery = parts[1] || "";
+                      const category = parts[2] || "";
 
-                const cacheKey = `blogs:${searchQuery}:${category}`;
+                      const blogs = await sql`
+                        SELECT * FROM blogs 
+                        ORDER BY create_at DESC
+                      `;
 
-                const blogs =
-                  await sql`SELECT * FROM blogs ORDER BY create_at DESC`;
+                      await redisClient.set(key, JSON.stringify(blogs), {
+                        EX: 3600,
+                      });
 
-                await redisClient.set(cacheKey, JSON.stringify(blogs), {
-                  EX: 3600,
-                });
-
-                console.log("🔄️ Cache rebuilt with key:", cacheKey);
-              }
-            }
-          }
+                      console.log("🔄️ Cache rebuilt with key:", key);
+                    }
+                }
+             }
+        }
 
           channel.ack(msg);
         } catch (error) {
