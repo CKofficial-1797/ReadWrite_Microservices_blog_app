@@ -122,7 +122,7 @@ The platform supports image uploads for user profiles and blog content using a c
  Flow -
 1. Client uploads an image using `multipart/form-data`
 2. Multer middleware parses the file in memory
-3. Server streams the file to Cloudinary
+3. Server converts the file buffer into a Data URI and uploads it to Cloudinary
 4. Cloudinary stores the image and returns a CDN URL
 5. The URL is stored in the database (MongoDB/PostgreSQL)
 6. Frontend renders images directly via Cloudinary CDN
