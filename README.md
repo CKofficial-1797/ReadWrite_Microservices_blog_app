@@ -102,6 +102,18 @@ The system is **eventually consistent**.
 -   No distributed transactions across databases.
 -   Cache invalidation is asynchronous.
 -   Short-lived staleness window is accepted for performance.
+------------------------------------------------------------------------
+### 6️⃣ AI-Powered Content Enhancement
+
+The platform uses **Google Gemini API** to improve content quality without changing user intent.
+
+- **AI Title Correction** → Fixes grammar of blog titles (returns only clean title)
+- **AI Description Handling**
+  - Generates short description (<30 words) if empty
+  - Fixes grammar if provided
+- **AI Blog HTML Correction**
+  - Corrects grammar, spelling, punctuation
+  - Preserves all HTML tags, styles, and formatting (no rewriting)
 
 ------------------------------------------------------------------------
 
