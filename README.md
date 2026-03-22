@@ -114,6 +114,23 @@ The platform uses **Google Gemini API** to improve content quality without chang
 - AI Blog HTML Correction
   - Corrects grammar, spelling, punctuation
   - Preserves all HTML tags, styles, and formatting (no rewriting)
+------------------------------------------------------------------------
+### 7️⃣ Media Upload Pipeline
+
+The platform supports image uploads for user profiles and blog content using a combination of Multer and Cloudinary.
+
+ Flow -
+1. Client uploads an image using `multipart/form-data`
+2. Multer middleware parses the file in memory
+3. Server streams the file to Cloudinary
+4. Cloudinary stores the image and returns a CDN URL
+5. The URL is stored in the database (MongoDB/PostgreSQL)
+6. Frontend renders images directly via Cloudinary CDN
+
+
+Client → Multer → Server → Cloudinary → URL → Database → Client
+
+
 
 ------------------------------------------------------------------------
 
