@@ -107,11 +107,11 @@ The system is **eventually consistent**.
 
 The platform uses **Google Gemini API** to improve content quality without changing user intent.
 
-- **AI Title Correction** → Fixes grammar of blog titles (returns only clean title)
-- **AI Description Handling**
+- AI Title Correction → Fixes grammar of blog titles (returns only clean title)
+- AI Description Handling
   - Generates short description (<30 words) if empty
   - Fixes grammar if provided
-- **AI Blog HTML Correction**
+- AI Blog HTML Correction
   - Corrects grammar, spelling, punctuation
   - Preserves all HTML tags, styles, and formatting (no rewriting)
 
