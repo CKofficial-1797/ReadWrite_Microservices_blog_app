@@ -134,6 +134,22 @@ Client → Multer → Server → Cloudinary → URL → Database → Client
 
 ------------------------------------------------------------------------
 
+### 8️⃣ Google OAuth 2.0 Authentication
+- User authenticates via Google (no passwords stored in app)
+- Google returns a short-lived **authorization code**
+- Frontend sends code to backend
+- Backend exchanges code for user data
+- User is created/fetched in database
+- Backend generates a **JWT token**
+- Frontend stores token (cookie)
+- Token is used for all protected API requests
+
+- Stateless authentication using JWT  
+- No password handling (Google manages identity)  
+- Secure server-side token exchange  
+  
+------------------------------------------------------------------------
+
 ## 🔄 System Flow
 
 1.  User logs in via Google OAuth.
