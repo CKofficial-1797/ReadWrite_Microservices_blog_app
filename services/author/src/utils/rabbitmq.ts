@@ -12,13 +12,13 @@ export const connectRabbitMQ = async () => {
                     username: "admin", 
                     password: "admin123",
     });
-    // const connection = await amqp.connect('amqp://admin:admin123@rabbitmq-docker-1yq7.onrender.com:5672');
+   
 
     channel = await connection.createChannel();
 
-    console.log("✅ Connected to Rabbitmq");
+    console.log(" Connected to Rabbitmq");
   } catch (error) {
-    console.error("❌ Failed to connect to Rabbitmq", error);
+    console.error(" Failed to connect to Rabbitmq", error);
   }
 };
 
@@ -44,8 +44,8 @@ export const invalidateChacheJob = async (cacheKeys: string[]) => {
 
     await publishToQueue("cache-invalidation", message);
 
-    console.log("✅ Cache invalidation job published to Rabbitmq");
+    console.log(" Cache invalidation job published to Rabbitmq");
   } catch (error) {
-    console.error("❌ Failed to Publish cache on Rabbitmq", error);
+    console.error(" Failed to Publish cache on Rabbitmq", error);
   }
 };
