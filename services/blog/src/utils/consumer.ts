@@ -51,24 +51,24 @@ export const startCacheConsumer = async () => {
                 console.log(
                   ` Blog service invalidated ${keys.length} cache keys matching: ${pattern}`
                 );
-                const blogs = await sql`
-                        SELECT * FROM blogs 
-                        ORDER BY create_at DESC
-                      `;
-                for (const key of keys) {
-                      const parts = key.split(":");                    
 
-                      
+                const category = "";
 
-                      await redisClient.set(key, JSON.stringify(blogs), {
-                        EX: 3600,
-                      });
+                const searchQuery = "";
 
-                      console.log(" Cache rebuilt with key:", key);
-                    }
-                }
-             }
-        }
+                const cacheKey = `blogs:${searchQuery}:${category}`;
+
+                const blogs =
+                  await sql`SELECT * FROM blogs ORDER BY create_at DESC`;
+
+                await redisClient.set(cacheKey, JSON.stringify(blogs), {
+                  EX: 3600,
+                });
+
+                console.log("🔄️ Cache rebuilt with key:", cacheKey);
+              }
+            }
+          }
 
           channel.ack(msg);
         } catch (error) {
