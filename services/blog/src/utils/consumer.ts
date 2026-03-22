@@ -52,20 +52,48 @@ export const startCacheConsumer = async () => {
                   ` Blog service invalidated ${keys.length} cache keys matching: ${pattern}`
                 );
 
-                const category = "";
+                for (const key of keys) {
+                      const parts = key.split(":");
 
-                const searchQuery = "";
+                      const searchQuery = parts[1] || "";
+                      const category = parts[2] || "";
 
-                const cacheKey = `blogs:${searchQuery}:${category}`;
+                      let blogs;
 
-                const blogs =
-                  await sql`SELECT * FROM blogs ORDER BY create_at DESC`;
+                      if (searchQuery && category) {
+                        blogs = await sql`
+                          SELECT * FROM blogs 
+                          WHERE title ILIKE ${"%" + searchQuery + "%"}
+                          AND category = ${category}
+                          ORDER BY create_at DESC
+                        `;
+                      } else if (searchQuery) {
+                        blogs = await sql`
+                          SELECT * FROM blogs 
+                          WHERE title ILIKE ${"%" + searchQuery + "%"}
+                          ORDER BY create_at DESC
+                        `;
+                      } else if (category) {
+                        blogs = await sql`
+                          SELECT * FROM blogs 
+                          WHERE category = ${category}
+                          ORDER BY create_at DESC
+                        `;
+                      } else {
+                        blogs = await sql`
+                          SELECT * FROM blogs 
+                          ORDER BY create_at DESC
+                        `;
+                      }
 
-                await redisClient.set(cacheKey, JSON.stringify(blogs), {
-                  EX: 3600,
-                });
+                      await redisClient.set(
+                        key,
+                        JSON.stringify({ message: "Blogs fetched", blogs }),
+                        { EX: 3600 }
+                      );
 
-                console.log("🔄️ Cache rebuilt with key:", cacheKey);
+                      console.log("🔄️ Cache rebuilt with key:", key);
+                    }
               }
             }
           }
