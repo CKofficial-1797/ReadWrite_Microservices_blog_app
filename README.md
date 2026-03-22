@@ -172,6 +172,10 @@ Client → Multer → Server → Cloudinary → URL → Database → Client
 -   Docker
 -   Docker Compose
 
+### Media Upload
+-   Multer
+-   Cloudinary
+
 ------------------------------------------------------------------------
 
 
