@@ -8,7 +8,6 @@ including:
 
 -   Service isolation
 -   Polyglot persistence
--   Asynchronous communication
 -   Cache-aside strategy
 -   Event-driven cache invalidation
 -   Stateless authentication
