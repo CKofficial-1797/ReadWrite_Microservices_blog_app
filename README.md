@@ -180,7 +180,7 @@ Client → Multer → Server → Cloudinary → URL → Database → Client
 
 ### Messaging
 
--   RabbitMQ (durable queues, manual acknowledgment)
+-   RabbitMQ 
 
 ### DevOps
 
